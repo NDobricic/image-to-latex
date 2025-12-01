@@ -1,0 +1,40 @@
+# Base configuration for img-to-latex models
+
+# Data settings
+data:
+  data_dir: /Data/img-to-latex
+  vocab_path: /Data/img-to-latex/vocab.json
+  img_size: 224
+  max_seq_len: 256
+  num_workers: 4
+
+# Model architecture
+model:
+  backbone: resnet18
+  pretrained_backbone: true
+  d_model: 256
+  nhead: 8
+  num_encoder_layers: 4
+  num_decoder_layers: 4
+  dim_feedforward: 1024
+  dropout: 0.1
+  in_channels: 1
+
+# Training settings
+training:
+  batch_size: 32
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_grad_norm: 1.0
+  accumulation_steps: 1
+  num_epochs: 50
+  eval_every: 1
+  patience: 10
+
+# Logging and checkpointing
+logging:
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  save_every: 5
+

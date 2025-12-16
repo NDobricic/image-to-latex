@@ -96,14 +96,7 @@ def compute_bleu(
     Returns:
         BLEU score (0-100)
     """
-    def clean_sequence(seq):
-        result = []
-        for t in seq:
-            if t == eos_id:
-                break
-            if t != pad_id:
-                result.append(t)
-        return result
+    
     
     def get_ngrams(seq, n):
         return [tuple(seq[i:i+n]) for i in range(len(seq) - n + 1)]
@@ -124,8 +117,17 @@ def compute_bleu(
                 total_count += count
         
         return clipped_count / total_count if total_count > 0 else 0.0
-    
-    # Clean sequences
+
+    def clean_sequence(seq):
+        result = []
+        for t in seq:
+            if t == eos_id:
+                break
+            if t != pad_id:
+                result.append(t)
+        return result
+
+    # Clean sequences for BLEU
     pred_clean = [clean_sequence(p) for p in predictions]
     ref_clean = [clean_sequence(t) for t in targets]
     

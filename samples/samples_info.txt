@@ -1,0 +1,10 @@
+sample_1_x____1___-_frac__2___3_.jpg: x _ { 1 } = - \frac { 2 } { 3 } x _ { 2 } = - 4
+sample_2_0_sim_5.jpg: 0 \sim 5
+sample_3_angle_B_D_C__frac__1___2_.jpg: \angle B D C = \frac { 1 } { 2 } \angle A C B = 3 0 ^ { \circ }
+sample_4_-frac__13+1-frac__23.png: -\frac { 1}{3}+1=-\frac { 2}{3}
+sample_5_tildeA_7.png: \tilde{A}_{7}
+sample_6_y__5.jpg: y = 5
+sample_7_y__-_frac__4___3__x_+_fra.jpg: y = - \frac { 4 } { 3 } x + \frac { 3 2 } { 3 }
+sample_8_2112sqrt122.png: 2^{1/12}=\sqrt[12]{2}
+sample_9_hate.png: \hat{e}
+sample_10_x__frac__9___2_.jpg: x = \frac { 9 } { 2 }

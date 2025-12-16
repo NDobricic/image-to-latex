@@ -34,14 +34,14 @@ def sample_images_recursive(src_root, dst_root, n=5, exts=('.png', '.jpg', '.jpe
         print(f"Copied {len(sample_files)} images to {dst_folder}")
 
 
-sample_images_recursive('data/img-to-latex/converted/crohme/crohme2012_train',
+sample_images_recursive('/Data/img-to-latex/converted/crohme/crohme2012_train',
                         'notebooks/samples/crohme/2012', n=100)
 
-sample_images_recursive('data/img-to-latex/converted/crohme/crohme2013_train',
+sample_images_recursive('/Data/img-to-latex/converted/crohme/crohme2013_train',
                         'notebooks/samples/crohme/2013', n=100)
 
-sample_images_recursive('data/img-to-latex/converted/mathwriting/train',
+sample_images_recursive('/Data/img-to-latex/converted/mathwriting/train',
                         'notebooks/samples/mathwriting', n=100)
 
-sample_images_recursive('data/img-to-latex/HME100K/train/train_images',
+sample_images_recursive('/Data/img-to-latex/HME100K/train/train_images',
                         'notebooks/samples/HME100K', n=100)

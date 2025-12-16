@@ -43,4 +43,4 @@ logs/
 data/
 *.log
 resume.log
-
+scripts/notebooks/

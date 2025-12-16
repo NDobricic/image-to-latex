@@ -188,9 +188,21 @@ def main():
         eos_id=tokenizer.eos_id,
     )
     
+    # Compute semantic sequence accuracy (ignoring whitespace)
+    semantic_correct = 0
+    for pred, gt in zip(all_latex_pred, all_latex_gt):
+        # Normalize by removing all whitespace
+        pred_norm = "".join(pred.split())
+        gt_norm = "".join(gt.split())
+        if pred_norm == gt_norm:
+            semantic_correct += 1
+    
+    metrics['semantic_accuracy'] = semantic_correct / len(all_latex_pred) if all_latex_pred else 0.0
+
     print("\nResults:")
     print(f"  Token Accuracy:    {metrics['token_accuracy']:.4f}")
     print(f"  Sequence Accuracy: {metrics['sequence_accuracy']:.4f}")
+    print(f"  Semantic Accuracy: {metrics['semantic_accuracy']:.4f}")
     print(f"  BLEU Score:        {metrics['bleu']:.2f}")
     
     # Save predictions if requested
@@ -208,6 +220,10 @@ def main():
         print(f"Pred: {all_latex_pred[i][:60]}")
         print(f"True: {all_latex_gt[i][:60]}")
         print("-" * 40)
+    
+    print("\nFull Results Summary:")
+    for k, v in metrics.items():
+        print(f"  {k}: {v:.4f}")
 
 
 if __name__ == "__main__":

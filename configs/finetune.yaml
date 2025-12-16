@@ -33,4 +33,4 @@ checkpoint:
 logging:
   checkpoint_dir: checkpoints/finetune
   log_dir: logs/finetune
-
+  save_every: 10

@@ -309,7 +309,9 @@ class TransformerDecoder(nn.Module):
             new_scores = []
             
             for score, beam_idx, token_idx in zip(top_scores, beam_indices, token_indices):
-                new_seq = torch.cat([beams[beam_idx], token_idx.unsqueeze(0).unsqueeze(0)], dim=1)
+                # Convert to int and keep 2D shape (1, L) for concatenation
+                b_idx = beam_idx.item()
+                new_seq = torch.cat([beams[b_idx:b_idx+1], token_idx.view(1, 1)], dim=1)
                 
                 if token_idx.item() == eos_id:
                     # Finished beam

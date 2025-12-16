@@ -282,6 +282,12 @@ class Trainer:
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         
         if checkpoint['scheduler_state_dict'] and self.scheduler:
+            # Update total_steps in the loaded state dict to match the current configuration
+            # This prevents "Tried to step X times. The specified number of total steps is Y" errors
+            # when resuming with OneCycleLR
+            if 'total_steps' in checkpoint['scheduler_state_dict']:
+                checkpoint['scheduler_state_dict']['total_steps'] = self.scheduler.total_steps
+            
             self.scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
         
         self.global_step = checkpoint.get('global_step', 0)
@@ -316,7 +322,11 @@ class Trainer:
         start_epoch = 0
         
         # Initialize scheduler
-        total_steps = len(self.train_loader) * num_epochs // self.accumulation_steps
+        # Add a small buffer to total_steps to prevent OneCycleLR from crashing
+        # if the dataloader has one extra batch or rounding issues occur
+        steps_per_epoch = len(self.train_loader) // self.accumulation_steps
+        total_steps = steps_per_epoch * num_epochs + 100
+        
         self.scheduler = OneCycleLR(
             self.optimizer,
             max_lr=self.learning_rate,

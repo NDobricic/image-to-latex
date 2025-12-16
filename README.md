@@ -2,6 +2,52 @@
 
 Deep learning pipeline for converting handwritten mathematical expressions to LaTeX.
 
+## Quick Demo
+
+Run the interactive demo to convert handwritten math images to LaTeX:
+
+```bash
+python scripts/demo.py
+```
+
+Once the model loads, enter image paths to get LaTeX output:
+
+```
+============================================================
+  MODEL READY - Enter image paths to convert to LaTeX
+============================================================
+
+Enter image path (or 'quit' to exit): samples/sample_4_-frac__13+1-frac__23.png
+
+Processing: samples/sample_4_-frac__13+1-frac__23.png
+
+LaTeX Output:
+  -\frac { 1}{3}+1=-\frac { 2}{3}
+```
+
+### Demo Options
+
+```bash
+# Single image (non-interactive)
+python scripts/demo.py --image path/to/image.png
+
+# Use greedy decoding (faster)
+python scripts/demo.py --beam-size 1
+
+# Custom checkpoint
+python scripts/demo.py --checkpoint checkpoints/finetune/best.pt
+```
+
+### Pretrained Weights
+
+Download the pretrained and fine-tuned model weights:
+
+1. Download `checkpoints.zip` from [Google Drive](https://drive.google.com/file/d/1VsjEsXlUiztTwB5j64jEmA5VrnqQAYay/view?usp=sharing)
+2. Extract to the `checkpoints/` folder:
+   ```bash
+   unzip checkpoints.zip -d checkpoints/
+   ```
+
 ## Architecture
 
 - **Encoder**: CNN backbone (ResNet) + 2D positional encoding + Transformer encoder
@@ -47,9 +93,9 @@ Run the following scripts to prepare the data for training. You can specify your
 
 1. **Extract CROHME sub-archives:**
    The CROHME dataset comes with internal zip files that need to be extracted.
-   ```bash
+```bash
    python scripts/extract_crohme.py --data-dir /path/to/your/data
-   ```
+```
 
 2. **Convert InkML to Images:**
    Convert the online handwritten datasets (MathWriting, CROHME) from InkML to PNG images.
@@ -60,7 +106,7 @@ Run the following scripts to prepare the data for training. You can specify your
 
 3. **Build Vocabulary:**
    Create the tokenizer vocabulary from all available datasets.
-   ```bash
+```bash
    python scripts/build_vocab.py --data-dir /path/to/your/data --base-vocab /path/to/your/data/PRINTED_TEX_230k/230k.json
    ```
 
@@ -135,7 +181,7 @@ python scripts/evaluate.py --config configs/finetune.yaml --checkpoint checkpoin
 - **Test Specific Split:** Evaluate on validation or test sets.
   ```bash
   python scripts/evaluate.py ... --split valid
-  ```
+```
 
 ## Project Structure
 

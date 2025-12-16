@@ -93,9 +93,9 @@ Run the following scripts to prepare the data for training. You can specify your
 
 1. **Extract CROHME sub-archives:**
    The CROHME dataset comes with internal zip files that need to be extracted.
-```bash
+   ```bash
    python scripts/extract_crohme.py --data-dir /path/to/your/data
-```
+   ```
 
 2. **Convert InkML to Images:**
    Convert the online handwritten datasets (MathWriting, CROHME) from InkML to PNG images.
@@ -106,7 +106,7 @@ Run the following scripts to prepare the data for training. You can specify your
 
 3. **Build Vocabulary:**
    Create the tokenizer vocabulary from all available datasets.
-```bash
+   ```bash
    python scripts/build_vocab.py --data-dir /path/to/your/data --base-vocab /path/to/your/data/PRINTED_TEX_230k/230k.json
    ```
 
@@ -181,7 +181,7 @@ python scripts/evaluate.py --config configs/finetune.yaml --checkpoint checkpoin
 - **Test Specific Split:** Evaluate on validation or test sets.
   ```bash
   python scripts/evaluate.py ... --split valid
-```
+  ```
 
 ## Project Structure
 
@@ -191,6 +191,7 @@ img-to-latex/
 ├── scripts/           # CLI entry points
 │   ├── train.py           # Main training loop
 │   ├── evaluate.py        # Evaluation and metric calculation
+│   ├── demo.py            # Interactive inference demo
 │   ├── build_vocab.py     # Vocabulary generation
 │   ├── inkml_to_image.py  # Data preprocessing
 │   └── extract_crohme.py  # Data preprocessing
